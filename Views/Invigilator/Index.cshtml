@@ -1,0 +1,43 @@
+@model IEnumerable<StudentRecordManagementSystem.Models.Student>
+@{
+    ViewData["Title"] = "Invigilator Dashboard";
+}
+<div class="d-flex align-items-center mb-3">
+    <h2 class="me-auto mb-0">Invigilator Dashboard</h2>
+</div>
+<a class="btn btn-primary mb-3" asp-action="Create">Add Student</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Roll</th>
+            <th>Name</th>
+            <th>Maths</th>
+            <th>Physics</th>
+            <th>Chemistry</th>
+            <th>English</th>
+            <th>Programming</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var s in Model)
+    {
+        <tr>
+            <td>@s.RollNumber</td>
+            <td>@s.Name</td>
+            <td>@s.Maths</td>
+            <td>@s.Physics</td>
+            <td>@s.Chemistry</td>
+            <td>@s.English</td>
+            <td>@s.Programming</td>
+            <td>
+                <a class="btn btn-sm btn-info" asp-action="Details" asp-route-rollNumber="@s.RollNumber">Details</a>
+                <a class="btn btn-sm btn-warning" asp-action="Edit" asp-route-rollNumber="@s.RollNumber">Edit</a>
+                <form asp-action="Disable" asp-route-rollNumber="@s.RollNumber" method="post" style="display:inline">
+                    <button class="btn btn-sm btn-danger" type="submit">Disable</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
